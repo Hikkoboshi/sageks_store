@@ -1,0 +1,19 @@
+{% extends "sageks_store/base.html" %}
+{% load static %}
+{% block title %}Узнать статус заказа{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <h2>Узнать статус заказа</h2>
+            <p>Вы можете ввести номер заказа, чтобы узнать его детали и статус.
+                <span class="text-muted fs-low">(Номер заказа выдается после оформления и оплаты, также его можно узнать в письме, отправленном на указанную Вами почту)</span></p>
+            <form action="." method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <p><input class="btn btn-primary mx-auto" type="submit" value="Найти"></p>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

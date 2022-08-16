@@ -1,0 +1,23 @@
+{% extends "sageks_store/base.html" %}
+{% load static %}
+{% block title %}Cтатус заказа{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <div class="card">
+            {% if order %}
+            <div class="card-header">Статус заказа №{{ order.id }}</div>
+            <div class="card-body">
+                <p class="card-text"><b>{{ order.status }}.</b></p>
+                <p class="card-text text-muted">Если статус Вашего заказа долго не менялся и с Вами не связывался менеджер, позвоните нам!</p>
+            </div>
+            {% else %}
+            <div class="card-header">Возникла ошибка</div>
+            <div class="card-body">
+                <p class="card-text">{% if messages %}{% for message in messages %}{{ message }}{% endfor %}{% endif %}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

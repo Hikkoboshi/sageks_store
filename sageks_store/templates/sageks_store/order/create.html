@@ -1,0 +1,35 @@
+{% extends "sageks_store/base.html" %}
+
+{% block title %}Оформление заказа{% endblock %}
+
+{% block content %}
+    <h1>Оформление заказа</h1>
+    <div class="order-info">
+        <h3>Ваш заказ</h3>
+        <ul>
+            {% for item in basket %}
+                <li>
+                    {{ item.quantity }} шт. {{ item.product.name }}
+                    <span>{{ item.total_price }} ₽</span>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+    <div class="order-form">
+        <form action="." method="post" class="order-form">
+            {% csrf_token %}
+            <h4>Заполните форму оформления заказа</h4>
+            <hr class="mb-3">
+            {% for field in form %}
+            <div class="row">
+                <p class="form-label my-0">{{ field.label }}:</p>
+                {{ field }}
+            </div>
+            {% endfor %}
+            <div class="row"><p>К оплате: {{ basket.get_total_price }} ₽</p></div>
+            <div class="row"><input class="btn btn-primary" type="submit" value="Оформить заказ"></div>
+
+        </form>
+    </div>
+{% endblock %}

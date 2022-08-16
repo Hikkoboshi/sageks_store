@@ -1,0 +1,51 @@
+{% extends 'sageks_store/base.html' %}
+{% load static %}
+
+{% block title %}Каталог{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% if category %}
+            {{ category.name }}
+        {% elif query %}
+            Поиск по запросу "{{ query }}"
+        {% else %}
+            Каталог
+        {% endif %}
+    </h1>
+    <div>
+        {% if products %}
+        <section>
+            <div class="row">
+                {% for product in products %}
+                <div class="card col-sm-6 product-card">
+                    <a href="{{ product.get_absolute_url }}" class="text-decoration-none text-dark">
+                        <img src="{% if product.primary_image %}{{ product.primary_image.image.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" class="card-img-top product-img" alt="{{ product.name }}">
+                        <hr>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name|truncatechars:15 }}</h5>
+                            <p class="card-text">{{ product.price }} ₽</p>
+                        </div>
+                    </a>
+                    <form action="{% url 'basket_add' product.id %}" method="post" class="row mb-3">
+                        <div class="input-group">
+                            {% for form in basket_product_form %}
+                                {{ form }}
+                            {% endfor %}
+                            <input type="hidden" name="path" value="{{ request.path }}" id="id_path">
+                            {% csrf_token %}
+                            <input class="btn btn-primary col-md-8" type="submit" value="В корзину">
+                        </div>
+                    </form>
+                </div>
+
+                {% endfor %}
+            </div>
+        </section>
+        {% else %}
+            <h3>Товары не найдены.</h3>
+        {% endif %}
+    </div>
+{% endblock %}

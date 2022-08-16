@@ -1,0 +1,81 @@
+/* #003366, #4c7093 */
+
+html, body{
+    height: 100%;
+}
+
+hr {
+    margin: 0;
+    width: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.base-nav {
+    background-color: #003366;
+}
+
+.base-nav-contact {
+    font-size: 0.8rem;
+}
+
+.base-header-contact {
+    font-size: 0.8rem;
+}
+
+.base-header {
+    color: #003366;
+}
+
+.base-footer {
+    font-size: 0.6rem;
+    background-color: #003366;
+    flex: 0 0 auto;
+}
+
+.fs-low {
+    font-size: 0.8rem;
+}
+
+.product-card {
+    width: 14rem;
+    margin-right: 30px;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.product-img {
+    height: 14rem;
+}
+
+.brand-name {
+    color: #003366;
+}
+
+.order-form {
+    width: 30rem;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.btn {
+    --bs-btn-focus-box-shadow: none;
+}
+.btn:focus, .btn.show:focus {
+    box-shadow: none;
+}
+
+.dropdown-menu.show {
+    inset: -2px auto auto 0px !important;
+}
+
+.form-search {
+    width: 45rem !important;
+}

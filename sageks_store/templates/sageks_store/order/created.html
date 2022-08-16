@@ -1,0 +1,9 @@
+{% extends "sageks_store/base.html" %}
+
+{% block title %}Заказ оформлен{% endblock %}
+
+{% block content %}
+    <h1>Спасибо за заказ!</h1>
+    <p>Ваш заказ был успешно оформлен. Держите номер для отслеживания заказа: №<strong>{{ order.id }}</strong>.</p>
+    <p>Вы можете отследить заказ <a href="{% url 'order_status' %}">здесь</a>.</p>
+{% endblock %}

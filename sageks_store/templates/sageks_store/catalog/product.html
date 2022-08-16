@@ -1,0 +1,45 @@
+{% extends 'sageks_store/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="{% url 'product_list' %}">Каталог</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    {% if product %}
+    <h1>{{ product.name }}</h1>
+    <div>
+        <section>
+            <div class="row">
+                <div class="card col-sm-6 product-card">
+                  <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" class="card-img-top product-img">
+                  <div class="card-body">
+                    <h5 class="card-title"><a href="">{{ product.name }}</a></h5>
+                    <p class="card-text">{{ product.price }} ₽</p>
+                    <form action="{% url 'basket_add' product.id %}" method="post" class="row">
+                        <div class="input-group">
+                            {% for form in basket_product_form %}
+                                {{ form }}
+                            {% endfor %}
+                            <input type="hidden" name="path" value="{{ request.path }}" id="id_path">
+                            {% csrf_token %}
+                            <input class="btn btn-primary" type="submit" value="В корзину">
+                        </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </section>
+    {% else %}
+            <h3>Товары не найдены.</h3>
+    {% endif %}
+    </div>
+{% endblock %}
